@@ -1,8 +1,8 @@
 const pg = require("pg");
 const express = require("express");
-
+const bodyParser = require("body-parser");
 const app = express();
-
+app.use(express.json());
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
@@ -19,6 +19,12 @@ app.get("/movies", async (req, res) => {
   } catch (error) {
     console.error(error);
   }
+});
+
+app.post("/movies", (req, res) => {
+  const { title } = req.body;
+  console.log(title);
+  res.send(`Received movie title: ${title}`);
 });
 app.listen(3000, () => {
   console.log("Server is on port 3000");
