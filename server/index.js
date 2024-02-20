@@ -2,7 +2,9 @@ const pg = require("pg");
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+
 app.use(express.json());
+
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
@@ -21,11 +23,21 @@ app.get("/movies", async (req, res) => {
   }
 });
 
-app.post("/movies", (req, res) => {
-  const { title } = req.body;
-  console.log(title);
-  res.send(`Received movie title: ${title}`);
+app.post("/movies", async (req, res) => {
+  const { title, genre, rating } = req.body;
+
+  try {
+    const result = await db.query(
+      "INSERT INTO movies (title,genre,rating ) VALUES ($1,$2,$3) RETURNING *",
+      [title, genre, rating]
+    );
+    const insertedMovie = result.rows[0];
+    res.json(insertedMovie);
+  } catch (error) {
+    console.error(error);
+  }
 });
+
 app.listen(3000, () => {
   console.log("Server is on port 3000");
 });
