@@ -5,6 +5,7 @@ const app = express();
 
 app.use(express.json());
 
+//specifying the database
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
@@ -13,7 +14,10 @@ const db = new pg.Client({
   port: 5432,
 });
 
+//connecting the database
 db.connect();
+
+//to get all the movies
 app.get("/movies", async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM movies");
