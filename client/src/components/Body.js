@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import MovieCard from "./MovieCard";
+import { Link } from "react-router-dom";
 const Body = () => {
   const [listOfMovies, setListofMovies] = useState([]);
   const [movieName, setMovieName] = useState("Attack on Titan");
@@ -32,13 +34,18 @@ const Body = () => {
           onChange={(e) => setMovieName(e.target.value)}
           className="p-2 border border-gray-300 rounded-md focus: outline-double w-1/2"
         />
-
         <button
-          className="Search-Button  text-white px-4 py-3 rounded-md ml-4 transition duration-300 hover:bg-pink-500"
+          className="Search-Button bg-pink text-white px-4 py-3 rounded-md ml-4 transition duration-300 hover:bg-pink-500"
           onClick={handleClick}
         >
           <h2>Search</h2>
         </button>
+      </div>
+
+      <div className="movie-cards flex flex-wrap ">
+        {listOfMovies.map((listOfMovie) => (
+          <MovieCard moviesData={listOfMovie} key={listOfMovie.imdbID} />
+        ))}
       </div>
     </div>
   );
