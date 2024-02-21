@@ -19,9 +19,29 @@ const Body = () => {
       console.error(error);
     }
   };
-
+  const handleClick = () => {
+    fetchData();
+  };
   console.log(listOfMovies);
-  return <div>Hi this is the body</div>;
+  return (
+    <div className="Body">
+      <div className="SearchBar bg-gray-100 px-4 py-3 flex items-center ">
+        <input
+          type="text"
+          value={movieName}
+          onChange={(e) => setMovieName(e.target.value)}
+          className="p-2 border border-gray-300 rounded-md focus: outline-double w-1/2"
+        />
+
+        <button
+          className="Search-Button  text-white px-4 py-3 rounded-md ml-4 transition duration-300 hover:bg-pink-500"
+          onClick={handleClick}
+        >
+          <h2>Search</h2>
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default Body;
