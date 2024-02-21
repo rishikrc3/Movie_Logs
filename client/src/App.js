@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-
+import Body from "./components/Body";
+import Header from "./components/Header";
 const App = () => {
   const [movies, setMovies] = useState([]);
 
@@ -21,7 +22,10 @@ const App = () => {
 
   return (
     <>
-      <div>Hi</div>
+      <div>
+        <Header />
+        <Body />
+      </div>
     </>
   );
 };
