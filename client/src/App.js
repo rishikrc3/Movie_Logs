@@ -7,18 +7,6 @@ import "./index.css";
 const App = () => {
   const [movies, setMovies] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:3000/movies");
-  //       setMovies(response.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
   console.log(movies);
 
   return (
