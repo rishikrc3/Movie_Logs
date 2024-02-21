@@ -44,7 +44,9 @@ const Body = () => {
 
       <div className="movie-cards flex flex-wrap ">
         {listOfMovies.map((listOfMovie) => (
-          <MovieCard moviesData={listOfMovie} key={listOfMovie.imdbID} />
+          <Link to={"/movies/" + listOfMovie.imdbID} className="custom-link">
+            <MovieCard moviesData={listOfMovie} key={listOfMovie.imdbID} />
+          </Link>
         ))}
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 const useMovieCard = (imdbID) => {
   const [movieData, setMovieData] = useState([]);
 
@@ -6,12 +7,10 @@ const useMovieCard = (imdbID) => {
     fetchData();
   }, []);
   const fetchData = async () => {
-    const data = await fetch(
+    const response = await axios.get(
       "https://www.omdbapi.com/?apikey=66263dea&i=" + imdbID + "#"
     );
-
-    const jsonData = await data.json();
-    setMovieData(jsonData);
+    setMovieData(response.data);
   };
 
   return movieData;
