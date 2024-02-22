@@ -2,9 +2,10 @@ const pg = require("pg");
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-
+const cors = require("cors");
 app.use(express.json());
 
+app.use(cors());
 //specifying the database
 const db = new pg.Client({
   user: "postgres",
@@ -27,18 +28,19 @@ app.get("/movies", async (req, res) => {
   }
 });
 
-app.post("/movies", async (req, res) => {
-  const { title, genre, rating } = req.body;
+app.post("/movies/watched", async (req, res) => {
+  const { Title, Genre, imdbRating, imdbID } = req.body;
 
   try {
     const result = await db.query(
-      "INSERT INTO movies (title,genre,rating ) VALUES ($1,$2,$3) RETURNING *",
-      [title, genre, rating]
+      "INSERT INTO movies (title,genre,rating,imdbID ) VALUES ($1,$2,$3,$4) RETURNING *",
+      [Title, Genre, imdbRating, imdbID]
     );
     const insertedMovie = result.rows[0];
     res.json(insertedMovie);
   } catch (error) {
     console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
