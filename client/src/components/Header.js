@@ -1,6 +1,7 @@
 import React from "react";
 import img from "./logo/logo.jpg";
 import { Link } from "react-router-dom";
+import "./Header.css";
 const Header = () => {
   return (
     <div className="flex items-center justify-between p-4 m-1  bg-pink-300 shadow-xl">
