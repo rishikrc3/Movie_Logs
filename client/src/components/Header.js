@@ -36,6 +36,14 @@ const Header = () => {
               Contact Us
             </Link>
           </li>
+          <li>
+            <Link
+              to="/watchedMovies"
+              className="custom-link text-white font-semibold text-lg"
+            >
+              Watched Movies
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
