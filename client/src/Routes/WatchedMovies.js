@@ -22,7 +22,7 @@ const WatchedMovies = () => {
   return (
     <div className="watched-movies-container">
       <h2 className="text-2xl font-bold mb-4">All Movies</h2>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-2 mx-auto">
         {watchedMovies.map((movie) => (
           <WatchedCard key={movie.imdbID} movieData={movie} />
         ))}
