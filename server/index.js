@@ -33,14 +33,26 @@ app.post("/movies/watched", async (req, res) => {
 
   try {
     const result = await db.query(
-      "INSERT INTO movies (title,genre,rating,imdbID,posterID ) VALUES ($1,$2,$3,$4,$5) RETURNING *",
-      [Title, Genre, imdbRating, imdbID, posterID]
+      "INSERT INTO movies (id,title,genre,rating,imdbID,posterID ) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *",
+      [imdbID, Title, Genre, imdbRating, imdbID, posterID]
     );
     const insertedMovie = result.rows[0];
     res.json(insertedMovie);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/movies/:imdbID", async (req, res) => {
+  try {
+    const result = await db.query("SELECT * FROM movies WHERE id = $1", [
+      req.params.imdbID,
+    ]);
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 

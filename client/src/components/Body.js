@@ -35,7 +35,7 @@ const Body = () => {
           className="p-2 border border-gray-300 rounded-md focus: outline-double w-1/2"
         />
         <button
-          className="Search-Button bg-pink text-white px-4 py-3 rounded-md ml-4 transition duration-300 hover:bg-pink-500"
+          className="Search-Button bg-pink text-white px-4 py-3 rounded-md ml-4 transition duration-300 bg-pink-500 hover:bg-pink-900"
           onClick={handleClick}
         >
           <h2>Search</h2>
@@ -44,7 +44,11 @@ const Body = () => {
 
       <div className="movie-cards flex flex-wrap ">
         {listOfMovies.map((listOfMovie) => (
-          <Link to={"/movies/" + listOfMovie.imdbID} className="custom-link">
+          <Link
+            to={"/movies/" + listOfMovie.imdbID}
+            key={listOfMovie.imdbID}
+            className="custom-link"
+          >
             <MovieCard moviesData={listOfMovie} key={listOfMovie.imdbID} />
           </Link>
         ))}

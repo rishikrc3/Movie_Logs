@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import useMovieCard from "./useMovieCard";
@@ -10,6 +10,23 @@ const RouteCard = () => {
   const movieData = useMovieCard(imdbID);
   const [isWatched, setIsWatched] = useState(false);
   console.log(movieData);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/movies/" + imdbID
+        );
+
+        console.log(response.data.length);
+        setIsWatched(() => response.data.length > 0);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const markAsWatched = async () => {
     try {
