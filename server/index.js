@@ -29,12 +29,12 @@ app.get("/movies", async (req, res) => {
 });
 
 app.post("/movies/watched", async (req, res) => {
-  const { Title, Genre, imdbRating, imdbID } = req.body;
+  const { Title, Genre, imdbRating, imdbID, posterID } = req.body;
 
   try {
     const result = await db.query(
-      "INSERT INTO movies (title,genre,rating,imdbID ) VALUES ($1,$2,$3,$4) RETURNING *",
-      [Title, Genre, imdbRating, imdbID]
+      "INSERT INTO movies (title,genre,rating,imdbID,posterID ) VALUES ($1,$2,$3,$4,$5) RETURNING *",
+      [Title, Genre, imdbRating, imdbID, posterID]
     );
     const insertedMovie = result.rows[0];
     res.json(insertedMovie);

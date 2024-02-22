@@ -18,6 +18,7 @@ const RouteCard = () => {
         Genre: movieData.Genre,
         imdbRating: movieData.imdbRating,
         imdbID: movieData.imdbID,
+        posterID: movieData.Poster,
       });
       console.log("Request successful!");
       setIsWatched(true);
